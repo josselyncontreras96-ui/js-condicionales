@@ -43,11 +43,11 @@
   //console.log(i);
 //}
 
-for (let i = 1; i <= 7; i++) {
-  if (i !== 5) {
-    console.log(i);
-  }
-}
+//for (let i = 1; i <= 7; i++) {
+  //if (i !== 5) {
+    //console.log(i);
+ // }
+//}
  
 
 
