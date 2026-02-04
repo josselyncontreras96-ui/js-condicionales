@@ -1,0 +1,14 @@
+.activo {
+  color: green;
+  font-weight: bold;
+}
+
+.oculto {
+  display: none;
+}
+
+.item {
+  padding: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 6px;
+}
