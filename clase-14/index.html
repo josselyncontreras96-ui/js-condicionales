@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mocha Tests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <script src="https://unpkg.com/chai@4/chai.js"></script>
+    <script src="https://unpkg.com/mocha/mocha.js"></script>
+
+    <script class="mocha-init">
+      mocha.setup("bdd");
+      mocha.checkLeaks();
+
+      const assert = chai.assert;
+    </script>
+
+    <script>
+    //function sumar(num1, num2) {
+    //return new Promise(function(resolve, reject) {
+     // setTimeout(function() {
+       // resolve(num1 + num2);
+     // }, 2000);
+    //});
+  //}
+  //function validadEdad (edad) {
+   // return new Promise(function(resolve, reject) {
+      //setTimeout(() =>{
+     //   if (edad < 18) {
+      //    reject("Menor de edad");
+       // } else {
+        //  resolve("acceso permitido");
+      //  }
+      //}, 2000);
+   // });
+  //}//
+  function contarPares(arr) {
+  let contador = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] % 2 === 0) {
+      contador++;
+    }
+  }
+
+  return contador;
+}
+  </script>
+
+    <script>
+
+        describe("contarPares", function () {
+  it("cuenta correctamente los pares", function () {
+    assert.strictEqual(contarPares([1, 2, 3, 4]), 2);
+  });
+});
+
+     //describe("Validar Edad", function() {
+
+    //it("Menor de edad", function(done) {
+     // this.timeout(3000); // aumentamos tiempo para evitar timeout
+
+     // validadEdad(15).catch(function(response) {
+      //  assert.strictEqual(response, "Menor de edad");
+      //  done();
+    //  });
+   // });
+
+  //  it("Mayor de edad", function(done) {
+     // this.timeout(3000);
+
+    //  validadEdad(25).then(function(response) {
+       // assert.strictEqual(response, "acceso permitido");
+    //    done();
+   //   });
+   // });
+  //});
+  </script>
+
+    <script class="mocha-exec">
+      mocha.run();
+    </script>
+  </body>
+</html>
