@@ -28,7 +28,7 @@ console.log(userJuan.saludar());
 };
 console.log(Prducto.detalle());*/
 
-class Producto {
+/*class Producto {
     constructor(nombre, precio, description = "sin descripcion", enStock = false) {
         this.nombre = nombre;
         this.precio = precio;
@@ -39,4 +39,50 @@ class Producto {
         return `El ${this.nombre} tiene el valor de ${this.precio} y $${this.enStock ? "está en stock" : "no está en stock"}`;
     }
 }
-console.log(new Producto("Producto 1", 100).detalle());
+console.log(new Producto("Producto 1", 100).detalle());*/
+
+// ----- Datos -----
+
+/*const users = [
+  { id: 1, email: "maria@ejemplo.com", password: "1234" },
+  { id: 2, email: "juan@ejemplo.com", password: "123456" }
+];
+
+const user = {
+  name: "Juan",
+  email: "juan@ejemplo.com",
+  password: "123456"
+};
+
+// ----- Objeto Session -----
+
+class Session {
+  constructor() {
+    this.userId = null;
+  }
+
+  check(email, password) {
+    const userFind = users.find(
+      (u) => email === u.email && password === u.password
+    );
+
+    if (userFind) {
+      this.userId = userFind.id;
+      return true;
+    }
+
+    return false;
+  }
+}
+
+const session = new Session();
+session.check(user.email, user.password);
+console.log(session.userId);*/
+
+const productos = [
+    { id: 1,
+    title: "Producto 1",
+    price: 100,
+    Oferta: false,
+}]
+

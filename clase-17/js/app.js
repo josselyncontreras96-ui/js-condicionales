@@ -1,53 +1,77 @@
 import { getProducts } from "./api.js";
 import { renderProducts, setStatus } from "./dom.js";
 import { filterProducts } from "./logic.js";
+import { Store } from "./store.js";
 
 const load = document.querySelector("#load");
 const search = document.querySelector("#search");
 const list = document.querySelector("#list");
 const status = document.querySelector("#status");
+const btnClear = document.querySelector("#clear");
 
-let productscache = [];
+const store = new Store();
+
 const state = {
-    products: [],
-    filtered: [], 
-    error: null,
-    loading: false,
-    loaded: false,
+  products: [],
+  filtered: [],
+  error: null,
+  loading: false,
+  loaded: false,
 };
 
 function reset() {
-    search.value = "";
-    state.error = null;
-    
+  search.value = "";
+  state.error = null;
+  state.filtered = state.products;
+  setStatus(status, "");
 }
 
-load.addEventListener("click", async () => {
-    try {
-        state.loading = true;
-        state.error = null
+function handleClear() {
+  reset();
+  state.filtered = state.products;
+  renderProducts(state.filtered, list);
+}
+
+async function loadProducts() {
+  try {
+    reset();
+    store.setLoading(true);
+    store.setError(null);
     setStatus(status, "Cargando...");
 
-    state.products = await getProducts();
+    const data = await getProducts();
 
-    state.loaded = true;
+    store.setProducts(data);
 
-    //productscache = state.products;
-    renderProducts(state.products, list);
+    renderProducts(store.getProducts(), list);
     setStatus(status, "");
-    } catch (error) {
-        setStatus(status,error.message);
-    }
-});
+  } catch (error) {
+    store.setError(error.message);
+    setStatus(status, store.getError());
+  } finally {
+    store.setLoading(false);
+    // console.log(store.getLoading());
+  }
+}
 
-search.addEventListener("input", (e) => {
-    if (!state.loaded) {
-        setStatus(status, "Primero tenes que cargar los productos");
-        return;
-    }
+function handleSearch(e) {
+  if (!state.loaded) {
+    setStatus(status, "Primero tenes que cargar los productos");
+    return;
+  }
 
-    const query = e.target.value;
-    //const filtered = filterProducts(productscache, query);
-    state.filtered = filterProducts(state.products, query);
-    renderProducts(state.filtered, list); 
-});
+  const query = e.target.value;
+store.filter(query);
+
+  if (state.filtered.length == 0) {
+    setStatus(status, "Sin resultados");
+  } else {
+    setStatus(status, "");
+  }
+
+  renderProducts(store.getProducts(), list);
+}
+
+btnClear.addEventListener("click", handleClear);
+load.addEventListener("click", loadProducts);
+search.addEventListener("input", handleSearch);
