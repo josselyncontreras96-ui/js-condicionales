@@ -19,3 +19,8 @@ export function renderProducts(products) {
     list.appendChild(li);
   });
 }
+
+export function renderCounter(products) {
+  const counter = document.querySelector("#counter");
+  counter.textContent = `Resultados: ${products.length}`;
+}

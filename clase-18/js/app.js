@@ -1,6 +1,6 @@
 import { products } from "./products.js";
 import { filterByQuery, filterByOffers } from "./logic.js";
-import { getFilters, renderProducts } from "./dom.js";
+import { getFilters, renderProducts, renderCounter } from "./dom.js";
 
 function renderAndFilter() {
   const { query, onlyOffers } = getFilters();
@@ -12,6 +12,7 @@ function renderAndFilter() {
   }
 
   renderProducts(filtered);
+  renderCounter(filtered);
 }
 
 renderAndFilter();
